@@ -1,0 +1,150 @@
+/* Platinum Container */
+.platinum-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  font-family: "Poppins", sans-serif;
+  width: 80%;
+  background: linear-gradient(180deg, rgba(229, 228, 226, 0.5), #ffffff);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid rgba(229, 228, 226, 0.6);
+}
+
+.platinum-container h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.error-message {
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.calculator {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calculator label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+.calculator select,
+.calculator input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.calculator input:focus,
+.calculator select:focus {
+  border-color: #e5e4e2;
+}
+
+.calculator .calculated-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  color: #b8b8b8;
+}
+
+.city-prices {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.city-prices th,
+.city-prices td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #e5e4e2; /* Platinum border */
+}
+
+.city-prices th {
+  background-color: #e5e4e2; /* Platinum background */
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.city-prices tr {
+  background-color: #f4f4f4;
+}
+
+.city-prices tr:hover {
+  background-color: #e8e8e8;
+}
+
+.city-prices td {
+  font-size: 1rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .platinum-container {
+    padding: 10px;
+  }
+
+  .calculator {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .calculator select,
+  .calculator input {
+    width: 100%;
+  }
+
+  .city-prices {
+    font-size: 0.9rem;
+  }
+
+  .city-prices th,
+  .city-prices td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .platinum-container h1 {
+    font-size: 1.6rem;
+  }
+
+  .calculator label {
+    font-size: 0.9rem;
+  }
+
+  .calculator select,
+  .calculator input {
+    font-size: 0.9rem;
+  }
+
+  .calculated-price {
+    font-size: 1rem;
+  }
+
+  .city-prices th,
+  .city-prices td {
+    font-size: 0.9rem;
+  }
+}
+

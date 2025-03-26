@@ -1,0 +1,62 @@
+.favorites {
+  padding: 20px;
+}
+
+.favorites h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.favorites button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.favorites button:hover {
+  background-color: #0056b3;
+}
+
+.stock-table {
+  margin-top: 20px;
+}
+
+.table-layout {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr); /* Updated to include an additional column */
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-layout.header {
+  font-weight: bold;
+}
+
+.table-layout.row {
+  align-items: center;
+}
+
+.table-layout.row:hover {
+  background-color: rgba(211, 211, 211, 0.8); /* Semi-transparent darker gray */
+}
+
+.btn-remove-favorite {
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-remove-favorite:hover {
+  background-color: rgba(220, 53, 69, 0.8); /* Semi-transparent red */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+}
+

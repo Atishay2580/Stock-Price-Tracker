@@ -1,0 +1,138 @@
+/* Stock.css */
+
+.stock-info {
+  font-family: "Arial", sans-serif;
+  margin: 20px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 90%;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.stock-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stock-info h1 {
+  font-size: 2.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.stock-info p {
+  font-size: 1.3rem;
+  color: #34495e;
+  margin: 15px 0;
+  line-height: 1.6;
+}
+
+.stock-info p strong {
+  font-weight: bold;
+  color: #2980b9;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 20px;
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+hr {
+  border: 0;
+  border-top: 2px solid #ddd;
+  margin: 20px 0;
+}
+
+button.chart-button {
+  background-color: #2980b9;
+  color: white;
+  padding: 14px 25px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+  width: 100%;
+  display: block;
+}
+
+button.chart-button:hover {
+  background-color: #3498db;
+  transform: translateY(-3px);
+}
+
+button.chart-button:active {
+  background-color: #1f618d;
+  transform: translateY(1px);
+}
+
+a {
+  color: #2980b9;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #3498db;
+  /* text-decoration: underline; */
+}
+
+a:focus {
+  outline: none;
+}
+
+button.chart-button:focus {
+  outline: none;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .stock-info {
+    padding: 30px;
+    margin: 15px;
+  }
+
+  .stock-info h1 {
+    font-size: 2rem;
+  }
+
+  .stock-info p {
+    font-size: 1.1rem;
+  }
+
+  button.chart-button {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+  }
+}
+

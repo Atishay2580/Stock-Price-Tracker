@@ -1,0 +1,337 @@
+.home {
+  padding: 0px 10px;
+  padding: 20px;
+  padding-bottom: 100px;
+}
+
+/* .main-row{
+  display:flex;
+  flex-direction:row;
+  align-items:space-between;
+  justify-content:space-between;
+} */
+
+.hero {
+  max-width: 600px;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+}
+
+.hero form {
+  padding: 8px;
+  width: 80%;
+  background-color: white;
+  border-radius: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.hero input {
+  flex: 1;
+  font-size: 16;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+}
+
+.hero button {
+  border: none;
+  background: linear-gradient(45deg, #7927ff, #ff6f91);
+  color: white;
+  font-size: 16px;
+  padding: 10px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(121, 39, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.hero button:hover {
+  background: linear-gradient(45deg, #ff6f91, #7927ff);
+  box-shadow: 0 6px 15px rgba(121, 39, 255, 0.7);
+  transform: scale(1.05);
+}
+
+.hero button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(121, 39, 255, 0.4);
+}
+
+.btn-add-favorite {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: linear-gradient(45deg, #ff5722, #ff9800);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(255, 87, 34, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-add-favorite:hover {
+  background: linear-gradient(45deg, #ff9800, #ff5722);
+  box-shadow: 0 6px 12px rgba(255, 87, 34, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-add-favorite:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(255, 87, 34, 0.2);
+}
+
+.btn-add-favorite:disabled {
+  background: #b0bec5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.stock-table {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  border-collapse: collapse;
+}
+
+.table-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr 3fr;
+  gap: 10px;
+  padding: 10px;
+  align-items: center;
+}
+
+.header {
+  background-color: #007bff;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.row {
+  background-color: #f9f9f924;
+  border: 1px solid #38407c2d;
+  border-radius: 5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.row:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.row p {
+  margin: 0;
+  padding: 10px;
+  text-align: left;
+}
+
+.row p.market-cap {
+  text-align: right;
+}
+
+.row p:nth-child(4) {
+  font-weight: bold;
+}
+
+/* .header p {
+text-align: center; 
+} */
+
+.header p.market-cap {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .stock-table .table-layout {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .stock-table .table-layout .row {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .hero form input {
+    width: 200px;
+  }
+
+  .hero form button {
+    padding: 8px 16px;
+  }
+
+  .stock-table .table-layout {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .stock-table .table-layout .row {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+.loading-spinner {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.loading-spinner div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 6px;
+  border: 4px solid #007bff; /* Adjust color */
+  border-radius: 50%;
+  animation: loading-spinner 1.2s linear infinite;
+  border-color: #007bff transparent transparent transparent;
+}
+
+.loading-spinner div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.loading-spinner div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.loading-spinner div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes loading-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.table-layout {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-layout.header {
+  font-weight: bold;
+  background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+  .table-layout {
+    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-areas:
+      "number stocks price"
+      "empty change market-cap";
+    padding: 5px;
+  }
+
+  .table-layout p {
+    font-size: 0.9rem;
+  }
+
+  .table-layout.header {
+    display: none;
+  }
+
+  .table-layout.row {
+    grid-template-areas:
+      "number stocks price"
+      "empty change market-cap";
+    border-bottom: 1px solid #ddd;
+    padding: 10px 5px;
+    width: 100%;
+  }
+
+  .table-layout.row p:nth-child(1) {
+    grid-area: number;
+  }
+
+  .table-layout.row p:nth-child(2) {
+    grid-area: stocks;
+  }
+
+  .table-layout.row p:nth-child(3) {
+    grid-area: price;
+  }
+
+  .table-layout.row p:nth-child(4) {
+    grid-area: change;
+    text-align: left;
+    padding-top: 5px;
+  }
+
+  .table-layout.row p:nth-child(5) {
+    grid-area: market-cap;
+    text-align: left;
+  }
+
+  .market-cap {
+    font-size: 0.8rem;
+  }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+  .table-layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "stocks price"
+      "change market-cap";
+  }
+
+  .table-layout.row p:nth-child(1) {
+    display: none; /* Hide the numbering */
+  }
+
+  .table-layout.row p:nth-child(2) {
+    grid-area: stocks;
+  }
+
+  .table-layout.row p:nth-child(3) {
+    grid-area: price;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .table-layout.row p:nth-child(4) {
+    grid-area: change;
+    font-size: 0.8rem;
+  }
+
+  .table-layout.row p:nth-child(5) {
+    grid-area: market-cap;
+    font-size: 0.8rem;
+  }
+
+  .stock-logo {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Align all headers to center */
+.table-layout.header p {
+  text-align: center;
+}
+

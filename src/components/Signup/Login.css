@@ -1,0 +1,122 @@
+/* Login Page Styles */
+
+/* Container for the entire login form */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Form Styling */
+.login-form {
+  background: linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 255, 0.115));
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0px 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+/* Header Styling */
+.login-header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+/* Styling for form groups (labels and inputs) */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Label Styling */
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+/* Input Styling */
+.form-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Button Styling */
+.form-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer Styling (Register Link) */
+.form-footer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Styling for the Google Sign-In Button */
+.continue-p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: aliceblue;
+}
+
+/* To align the Google Sign-In Button and continue with text */
+.continue-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.continue-button-container img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
