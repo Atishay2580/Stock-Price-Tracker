@@ -5,7 +5,6 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import { useFirebase, firebaseAuth } from "../../context/Firebase"
-import "./SignInWithGoogle.css" // optional styling file
 
 function SignInWithGoogle() {
   const [loading, setLoading] = useState(false)
