@@ -1,14 +1,13 @@
 "use client"
 
-import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
-import { auth, db } from "./firebase"
-import { setDoc, doc } from "firebase/firestore"
-import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { useFirebase } from "../../context/Firebase"
 import "./Register.css"
 
 function Register() {
+  const firebase = useFirebase()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [fname, setFname] = useState("")
@@ -19,67 +18,47 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault()
 
-    // Form validation
     if (!email || !password || !fname) {
-      toast.error("Please fill in all required fields", {
-        position: "bottom-center",
-      })
+      toast.error("Please fill in all required fields", { position: "bottom-center" })
       return
     }
 
     if (password.length < 6) {
-      toast.error("Password should be at least 6 characters", {
-        position: "bottom-center",
-      })
+      toast.error("Password should be at least 6 characters", { position: "bottom-center" })
       return
     }
 
     setLoading(true)
 
     try {
-      // Create user in Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+      const userCredential = await firebase.signUpUserWithEmailAndPassword(email, password)
       const user = userCredential.user
 
       if (user) {
-        // Add user to Firestore database
-        await setDoc(doc(db, "Users", user.uid), {
+        await firebase.putData("users/" + user.uid, {
+          uid: user.uid,
           email: user.email,
           firstName: fname,
-          lastName: lname || "", // Handle empty last name
+          lastName: lname || "",
           photo: "",
           createdAt: new Date().toISOString(),
         })
 
-        toast.success("Registration successful! Redirecting to login...", {
-          position: "top-center",
-        })
-
-        // Redirect to login after a short delay
-        setTimeout(() => {
-          navigate("/login")
-        }, 2000)
+        toast.success("Registration successful! Redirecting to login...", { position: "top-center" })
+        setTimeout(() => navigate("/login"), 1500)
       }
     } catch (error) {
-      console.error("Registration error:", error.message)
+      console.error("Registration error:", error)
+      const code = error.code || ""
 
-      // Handle different types of Firebase errors with user-friendly messages
-      if (error.code === "auth/email-already-in-use") {
-        toast.error("This email is already registered. Please log in or use a different email.", {
-          position: "bottom-center",
-        })
-      } else if (error.code === "auth/invalid-email") {
-        toast.error("Please enter a valid email address.", {
-          position: "bottom-center",
-        })
-      } else if (error.code === "auth/network-request-failed") {
-        toast.error("Network error. Please check your internet connection.", {
-          position: "bottom-center",
-        })
+      if (code.includes("email-already-in-use")) {
+        toast.error("This email is already registered. Please log in or use a different email.", { position: "bottom-center" })
+      } else if (code.includes("invalid-email")) {
+        toast.error("Please enter a valid email address.", { position: "bottom-center" })
+      } else if (code.includes("network-request-failed")) {
+        toast.error("Network error. Please check your internet connection.", { position: "bottom-center" })
       } else {
-        toast.error(`Registration failed: ${error.message}`, {
-          position: "bottom-center",
-        })
+        toast.error(`Registration failed: ${error.message || error}`, { position: "bottom-center" })
       }
     } finally {
       setLoading(false)
@@ -97,6 +76,7 @@ function Register() {
             type="text"
             className="form-input"
             placeholder="First name"
+            value={fname}
             onChange={(e) => setFname(e.target.value)}
             required
           />
@@ -108,6 +88,7 @@ function Register() {
             type="text"
             className="form-input"
             placeholder="Last name"
+            value={lname}
             onChange={(e) => setLname(e.target.value)}
           />
         </div>
@@ -118,6 +99,7 @@ function Register() {
             type="email"
             className="form-input"
             placeholder="Enter email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -128,6 +110,7 @@ function Register() {
           <input
             type="password"
             className="form-input"
+            value={password}
             placeholder="Enter password (min 6 characters)"
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -149,4 +132,3 @@ function Register() {
 }
 
 export default Register
-

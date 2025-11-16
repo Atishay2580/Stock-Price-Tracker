@@ -2,65 +2,57 @@
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { useState } from "react"
-import { auth, db } from "./firebase"
 import { toast } from "react-toastify"
-import { setDoc, doc, getDoc } from "firebase/firestore"
 import { useNavigate } from "react-router-dom"
+import { useFirebase, firebaseAuth } from "../../context/Firebase"
+import "./SignInWithGoogle.css" // optional: keep styling consistent
 
 function SignInwithGoogle() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const firebase = useFirebase()
 
   const googleLogin = async () => {
     setLoading(true)
     const provider = new GoogleAuthProvider()
 
     try {
-      // Sign in with Google
-      const result = await signInWithPopup(auth, provider)
+      // Sign in with Google using the firebaseAuth instance from your context file
+      const result = await signInWithPopup(firebaseAuth, provider)
       const user = result.user
 
-      // Check if this is the first login for this user
-      const userDocRef = doc(db, "Users", user.uid)
-      const userDoc = await getDoc(userDocRef)
+      if (user) {
+        // Prepare name parts
+        const nameParts = (user.displayName || "").split(" ")
+        const firstName = nameParts[0] || "Unknown"
+        const lastName = nameParts.slice(1).join(" ") || ""
 
-      if (!userDoc.exists()) {
-        // First time login, create user record
-        const firstName = user.displayName?.split(" ")[0] || "Unknown"
-        const lastName = user.displayName?.split(" ")[1] || ""
-
-        await setDoc(userDocRef, {
-          email: user.email,
-          firstName: firstName,
-          lastName: lastName,
+        // Save / update user data in Realtime Database under users/{uid}
+        await firebase.putData("users/" + user.uid, {
+          uid: user.uid,
+          email: user.email || "",
+          firstName,
+          lastName,
           photo: user.photoURL || "",
+          // store createdAt only if you want to overwrite every time; this writes current time
           createdAt: new Date().toISOString(),
         })
       }
 
-      toast.success(`Welcome, ${user.displayName || "User"}!`, {
-        position: "top-center",
-      })
+      toast.success(`Welcome, ${user.displayName || "User"}!`, { position: "top-center" })
 
-      // Redirect to home page
-      setTimeout(() => {
-        navigate("/")
-      }, 1000)
+      // Redirect to home
+      setTimeout(() => navigate("/"), 900)
     } catch (error) {
       console.error("Google login error: ", error)
+      const code = error.code || ""
 
-      if (error.code === "auth/popup-closed-by-user") {
-        toast.info("Google sign-in canceled.", {
-          position: "bottom-center",
-        })
-      } else if (error.code === "auth/network-request-failed") {
-        toast.error("Network error. Please check your internet connection.", {
-          position: "bottom-center",
-        })
+      if (code.includes("popup-closed-by-user")) {
+        toast.info("Google sign-in canceled.", { position: "bottom-center" })
+      } else if (code.includes("network-request-failed")) {
+        toast.error("Network error. Please check your internet connection.", { position: "bottom-center" })
       } else {
-        toast.error("Google login failed. Please try again.", {
-          position: "bottom-center",
-        })
+        toast.error("Google login failed. Please try again.", { position: "bottom-center" })
       }
     } finally {
       setLoading(false)
@@ -71,12 +63,7 @@ function SignInwithGoogle() {
     <div>
       <p className="continue-p">-- Or continue with --</p>
       <br />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <button className="btn btn-danger" onClick={googleLogin} disabled={loading}>
           {loading ? "Connecting..." : "Login with Google"}
         </button>
@@ -86,4 +73,3 @@ function SignInwithGoogle() {
 }
 
 export default SignInwithGoogle
-

@@ -1,14 +1,14 @@
 "use client"
 
-import { signInWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
-import { auth } from "./firebase"
 import { toast } from "react-toastify"
 import SignInwithGoogle from "./SignInWIthGoogle"
 import { useNavigate } from "react-router-dom"
+import { useFirebase } from "../../context/Firebase"
 import "./Login.css"
 
 function Login() {
+  const firebase = useFirebase()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
@@ -18,45 +18,30 @@ function Login() {
     e.preventDefault()
 
     if (!email || !password) {
-      toast.error("Please enter both email and password", {
-        position: "bottom-center",
-      })
+      toast.error("Please enter both email and password", { position: "bottom-center" })
       return
     }
 
     setLoading(true)
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      await firebase.signInUserWithEmailAndPassword(email, password)
 
-      toast.success("Login successful! Redirecting...", {
-        position: "top-center",
-      })
+      toast.success("Login successful! Redirecting...", { position: "top-center" })
 
-      // Redirect to home page
-      setTimeout(() => {
-        navigate("/")
-      }, 1000)
+      setTimeout(() => navigate("/"), 800)
     } catch (error) {
-      console.error("Login Error: ", error.message)
+      console.error("Login Error: ", error)
+      const code = error.code || ""
 
-      // Handle different types of auth errors
-      if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
-        toast.error("Invalid email or password. Please try again.", {
-          position: "bottom-center",
-        })
-      } else if (error.code === "auth/too-many-requests") {
-        toast.error("Too many failed login attempts. Please try again later or reset your password.", {
-          position: "bottom-center",
-        })
-      } else if (error.code === "auth/network-request-failed") {
-        toast.error("Network error. Please check your internet connection.", {
-          position: "bottom-center",
-        })
+      if (code.includes("user-not-found") || code.includes("wrong-password")) {
+        toast.error("Invalid email or password. Please try again.", { position: "bottom-center" })
+      } else if (code.includes("too-many-requests")) {
+        toast.error("Too many failed login attempts. Please try again later or reset your password.", { position: "bottom-center" })
+      } else if (code.includes("network-request-failed")) {
+        toast.error("Network error. Please check your internet connection.", { position: "bottom-center" })
       } else {
-        toast.error(`Login error: ${error.message}`, {
-          position: "bottom-center",
-        })
+        toast.error(`Login error: ${error.message || error}`, { position: "bottom-center" })
       }
     } finally {
       setLoading(false)
@@ -106,4 +91,3 @@ function Login() {
 }
 
 export default Login
-
