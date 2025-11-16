@@ -11,7 +11,8 @@ const firebaseConfig = {
   storageBucket: "stock-price-tracker-86a63.firebasestorage.app",
   messagingSenderId: "49558247792",
   appId: "1:49558247792:web:71f95e7c87d388d69457b5",
-  databaseURL: ""
+  databaseURL: "https://stock-price-tracker-86a63-default-rtdb.firebaseio.com/"
+"
 };
 
 const firebaseApp = initializeApp(firebaseConfig)
