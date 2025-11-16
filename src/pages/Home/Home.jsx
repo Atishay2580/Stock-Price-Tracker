@@ -49,7 +49,7 @@ const Home = () => {
             volume: Math.floor(Math.random() * 1000000),
           }
 
-          setFilteredStocks([stockData])
+          setFilteredStocks([stockData]) 
         } else {
           setFilteredStocks([])
           setError("No data available for the entered stock symbol.")

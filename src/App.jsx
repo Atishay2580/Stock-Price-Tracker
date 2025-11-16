@@ -13,13 +13,11 @@ import Register from "./components/Signup/Register"
 import Favorites from "./components/Favorites/Favorites"
 import { ToastContainer } from "react-toastify"
 import { AuthProvider } from "./assets/Context"
-import { FirebaseProvider } from "./context/Firebase"
 import Notification from "./pages/Notifyme/Notification"
 
 const App = () => {
   return (
-    // <AuthProvider>
-    <FirebaseProvider>
+    <AuthProvider>
       <div className="app">
         <Navbar />
         <Routes>
@@ -38,8 +36,7 @@ const App = () => {
         <ToastContainer />
         <Footer />
       </div>
-    </FirebaseProvider>
-    // </AuthProvider>
+    </AuthProvider>
   )
 }
 
