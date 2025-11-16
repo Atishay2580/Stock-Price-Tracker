@@ -1,8 +1,13 @@
-import { createContext } from "react"
+// src/context/Firebase.jsx
+import React, { createContext, useContext } from "react"
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth"
 import { getDatabase, set, ref } from "firebase/database"
-import { useContext } from "react"
 
 const firebaseConfig = {
   apiKey: "AIzaSyAyYEVAAbcSNgHqpEiwiUcOldBkaWkml_s",
@@ -11,9 +16,8 @@ const firebaseConfig = {
   storageBucket: "stock-price-tracker-86a63.firebasestorage.app",
   messagingSenderId: "49558247792",
   appId: "1:49558247792:web:71f95e7c87d388d69457b5",
-  databaseURL: "https://stock-price-tracker-86a63-default-rtdb.firebaseio.com/"
-"
-};
+  databaseURL: "https://stock-price-tracker-86a63-default-rtdb.firebaseio.com",
+}
 
 const firebaseApp = initializeApp(firebaseConfig)
 export const firebaseAuth = getAuth(firebaseApp)
@@ -23,18 +27,14 @@ const FirebaseContext = createContext(null)
 
 export const useFirebase = () => useContext(FirebaseContext)
 
-export const FirebaseProvider = (props) => {
-  const signUpUserWithEmailAndPassword = (email, password) => {
-    return createUserWithEmailAndPassword(firebaseAuth, email, password)
-  }
+export const FirebaseProvider = ({ children }) => {
+  const signUpUserWithEmailAndPassword = (email, password) =>
+    createUserWithEmailAndPassword(firebaseAuth, email, password)
 
-  const signInUserWithEmailAndPassword = (email, password) => {
-    return signInWithEmailAndPassword(firebaseAuth, email, password)
-  }
+  const signInUserWithEmailAndPassword = (email, password) =>
+    signInWithEmailAndPassword(firebaseAuth, email, password)
 
-  const signOutUser = () => {
-    return signOut(firebaseAuth)
-  }
+  const signOutUser = () => signOut(firebaseAuth)
 
   const putData = (key, data) => set(ref(db, key), data)
 
@@ -47,7 +47,7 @@ export const FirebaseProvider = (props) => {
         putData,
       }}
     >
-      {props.children}
+      {children}
     </FirebaseContext.Provider>
   )
 }

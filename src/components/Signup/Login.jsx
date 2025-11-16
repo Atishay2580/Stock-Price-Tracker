@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { toast } from "react-toastify"
-import SignInwithGoogle from "./SignInWIthGoogle"
-import { useNavigate } from "react-router-dom"
+import SignInWithGoogle from "./SignInWithGoogle"
+import { useNavigate, Link } from "react-router-dom"
 import { useFirebase } from "../../context/Firebase"
 import "./Login.css"
 
@@ -29,7 +29,9 @@ function Login() {
 
       toast.success("Login successful! Redirecting...", { position: "top-center" })
 
-      setTimeout(() => navigate("/"), 800)
+      setTimeout(() => {
+        navigate("/")
+      }, 800)
     } catch (error) {
       console.error("Login Error: ", error)
       const code = error.code || ""
@@ -82,9 +84,9 @@ function Login() {
         </div>
 
         <p className="form-footer">
-          New user? <a href="/register">Register Here</a>
+          New user? <Link to="/register">Register Here</Link>
         </p>
-        <SignInwithGoogle />
+        <SignInWithGoogle />
       </form>
     </div>
   )

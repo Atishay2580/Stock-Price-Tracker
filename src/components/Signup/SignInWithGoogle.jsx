@@ -5,9 +5,9 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import { useFirebase, firebaseAuth } from "../../context/Firebase"
-import "./SignInWithGoogle.css" // optional: keep styling consistent
+import "./SignInWithGoogle.css" // optional styling file
 
-function SignInwithGoogle() {
+function SignInWithGoogle() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const firebase = useFirebase()
@@ -17,12 +17,10 @@ function SignInwithGoogle() {
     const provider = new GoogleAuthProvider()
 
     try {
-      // Sign in with Google using the firebaseAuth instance from your context file
       const result = await signInWithPopup(firebaseAuth, provider)
       const user = result.user
 
       if (user) {
-        // Prepare name parts
         const nameParts = (user.displayName || "").split(" ")
         const firstName = nameParts[0] || "Unknown"
         const lastName = nameParts.slice(1).join(" ") || ""
@@ -34,14 +32,11 @@ function SignInwithGoogle() {
           firstName,
           lastName,
           photo: user.photoURL || "",
-          // store createdAt only if you want to overwrite every time; this writes current time
           createdAt: new Date().toISOString(),
         })
       }
 
       toast.success(`Welcome, ${user.displayName || "User"}!`, { position: "top-center" })
-
-      // Redirect to home
       setTimeout(() => navigate("/"), 900)
     } catch (error) {
       console.error("Google login error: ", error)
@@ -72,4 +67,4 @@ function SignInwithGoogle() {
   )
 }
 
-export default SignInwithGoogle
+export default SignInWithGoogle

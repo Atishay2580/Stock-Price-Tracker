@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import { useFirebase } from "../../context/Firebase"
 import "./Register.css"
@@ -123,8 +123,9 @@ function Register() {
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </div>
+
         <p className="form-footer">
-          Already registered? <a href="/login">Login</a>
+          Already registered? <Link to="/login">Login</Link>
         </p>
       </form>
     </div>
