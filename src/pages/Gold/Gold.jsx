@@ -169,7 +169,7 @@ const Gold = () => {
           {renderPriceTable(100)}
         </div>
       ) : (
-        <LoadingSpinner />
+        <LoadingSpinner message="Fetching gold prices..." />
       )}
     </div>
   )

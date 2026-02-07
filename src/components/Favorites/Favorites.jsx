@@ -38,53 +38,67 @@ const Favorites = () => {
       <h1>Your Favorites</h1>
       {favorites.length > 0 ? (
         <div>
-          <button onClick={removeAllFavorites}>Remove All</button>
-          <div className="stock-table">
-            <div className="table-layout header">
-              <p>#</p>
-              <p>Stocks</p>
-              <p>Price</p>
-              <p style={{ textAlign: "center" }}>24H Change</p>
-              <p>P/E Ratio</p>
-              <p>EPS</p>
-              <p>Volume</p>
-              <p>Action - 1</p>
-              <p>Action - 2</p>
-            </div>
-            {favorites.map((stock, index) => (
-              <div key={stock.symbol} className="table-layout row">
-                <p>{index + 1}</p>
-                <p>{stock.symbol}</p>
-                <p>${stock.price}</p>
-                <p
-                  style={{
-                    textAlign: "center",
-                    color: stock.change >= 0 ? "green" : "red",
-                  }}
-                >
-                  {stock.change}%
-                </p>
-                <p>{stock.peRatio}</p>
-                <p>{stock.eps}</p>
-                <p>{stock.volume.toLocaleString()}</p>
-                <button className="btn-remove-favorite" onClick={() => removeFromFavorites(stock)}>
-                  Remove
-                </button>
-                <button>
-                  <Link
-                    to={`/favorites/Notification?symbol=${encodeURIComponent(
-                      stock.symbol,
-                    )}&price=${encodeURIComponent(stock.price)}&change=${encodeURIComponent(stock.change)}`}
-                  >
-                    Notification
-                  </Link>
-                </button>
-              </div>
-            ))}
+          <button className="btn-remove-all" onClick={removeAllFavorites}>
+            Remove All
+          </button>
+          <div className="favorites-table-wrapper">
+            <table className="favorites-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Stocks</th>
+                  <th>Price</th>
+                  <th>24H Change</th>
+                  <th>Market Cap</th>
+                  <th>P/E Ratio</th>
+                  <th>EPS</th>
+                  <th>Volume</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {favorites.map((stock, index) => (
+                  <tr key={stock.symbol} className="favorite-row">
+                    <td>{index + 1}</td>
+                    <td>
+                      <Link to={`/stock/${stock.symbol}`} className="stock-link">
+                        {stock.symbol}
+                      </Link>
+                    </td>
+                    <td>${stock.price}</td>
+                    <td
+                      className={stock.change >= 0 ? "change-positive" : "change-negative"}
+                    >
+                      {stock.change}%
+                    </td>
+                    <td>${stock.marketCap || "N/A"}B</td>
+                    <td>{stock.peRatio}</td>
+                    <td>{stock.eps}</td>
+                    <td>{stock.volume.toLocaleString()}</td>
+                    <td className="actions-cell">
+                      <button
+                        className="btn-remove-favorite"
+                        onClick={() => removeFromFavorites(stock)}
+                      >
+                        Remove
+                      </button>
+                      <Link
+                        to={`/favorites/Notification?symbol=${encodeURIComponent(
+                          stock.symbol,
+                        )}&price=${encodeURIComponent(stock.price)}&change=${encodeURIComponent(stock.change)}`}
+                        className="btn-notification"
+                      >
+                        Notification
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       ) : (
-        <p>No favorites added yet.</p>
+        <p className="no-favorites-message">No favorites added yet.</p>
       )}
     </div>
   )

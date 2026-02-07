@@ -1,62 +1,254 @@
 .favorites {
   padding: 20px;
+  min-height: 60vh;
 }
 
 .favorites h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 2rem;
 }
 
-.favorites button {
+.btn-remove-all {
   display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  background-color: #007bff;
+  margin: 0 auto 30px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.8), rgba(255, 87, 34, 0.8));
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
 }
 
-.favorites button:hover {
-  background-color: #0056b3;
+.btn-remove-all:hover {
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.9), rgba(220, 53, 69, 0.9));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
 
-.stock-table {
-  margin-top: 20px;
+.favorites-table-wrapper {
+  margin: 20px auto;
+  width: 95%;
+  max-width: 1400px;
+  overflow-x: auto;
 }
 
-.table-layout {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr); /* Updated to include an additional column */
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+.favorites-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.table-layout.header {
-  font-weight: bold;
+.favorites-table thead {
+  background: linear-gradient(135deg, rgba(121, 39, 255, 0.2), rgba(255, 111, 145, 0.2));
+  backdrop-filter: blur(10px);
 }
 
-.table-layout.row {
+.favorites-table th {
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.favorites-table th:nth-child(1) {
+  width: 50px;
+  text-align: center;
+}
+
+.favorites-table th:nth-child(3),
+.favorites-table th:nth-child(4),
+.favorites-table th:nth-child(5),
+.favorites-table th:nth-child(6),
+.favorites-table th:nth-child(7),
+.favorites-table th:nth-child(8) {
+  text-align: right;
+}
+
+.favorites-table th:nth-child(9) {
+  text-align: center;
+  width: 200px;
+}
+
+.favorites-table tbody tr {
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.favorites-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.favorites-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.favorites-table td {
+  padding: 16px 12px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  vertical-align: middle;
+}
+
+.favorites-table td:nth-child(1) {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.favorites-table td:nth-child(3),
+.favorites-table td:nth-child(4),
+.favorites-table td:nth-child(5),
+.favorites-table td:nth-child(6),
+.favorites-table td:nth-child(7),
+.favorites-table td:nth-child(8) {
+  text-align: right;
+  font-weight: 500;
+}
+
+.favorites-table td:nth-child(9) {
+  text-align: center;
+}
+
+.stock-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.stock-link:hover {
+  color: #ff6f91;
+}
+
+.change-positive {
+  color: #4ade80 !important;
+  font-weight: 600;
+}
+
+.change-negative {
+  color: #f87171 !important;
+  font-weight: 600;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
   align-items: center;
 }
 
-.table-layout.row:hover {
-  background-color: rgba(211, 211, 211, 0.8); /* Semi-transparent darker gray */
-}
-
 .btn-remove-favorite {
-  padding: 8px 12px;
-  background-color: #dc3545;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.8), rgba(255, 87, 34, 0.8));
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn-remove-favorite:hover {
-  background-color: rgba(220, 53, 69, 0.8); /* Semi-transparent red */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.9), rgba(220, 53, 69, 0.9));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-notification {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(37, 99, 235, 0.8));
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.btn-notification:hover {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(59, 130, 246, 0.9));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.no-favorites-message {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 60px 20px;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .favorites-table-wrapper {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .favorites-table {
+    font-size: 13px;
+  }
+
+  .favorites-table th,
+  .favorites-table td {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+
+  .favorites-table th:nth-child(5),
+  .favorites-table th:nth-child(6),
+  .favorites-table th:nth-child(7),
+  .favorites-table td:nth-child(5),
+  .favorites-table td:nth-child(6),
+  .favorites-table td:nth-child(7) {
+    display: none;
+  }
+
+  .actions-cell {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .btn-remove-favorite,
+  .btn-notification {
+    padding: 6px 12px;
+    font-size: 11px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .favorites h1 {
+    font-size: 1.5rem;
+  }
+
+  .favorites-table th:nth-child(8),
+  .favorites-table td:nth-child(8) {
+    display: none;
+  }
+
+  .favorites-table th,
+  .favorites-table td {
+    padding: 10px 6px;
+    font-size: 11px;
+  }
 }
 

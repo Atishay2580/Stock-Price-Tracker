@@ -4,17 +4,17 @@ import { useContext } from "react"
 import "./Navbar.css"
 import logo from "../../assets/logo.png"
 import Arrow from "../../assets/Arrow.png"
-import { Link, useNavigate } from "react-router-dom" // Import useNavigate
+import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../assets/Context"
 import { auth } from "../Signup/firebase"
+import { signOut } from "firebase/auth"
 
 const Navbar = () => {
   const { user } = useContext(AuthContext)
   const navigate = useNavigate() // Initialize useNavigate
 
   const handleLogout = () => {
-    auth
-      .signOut()
+    signOut(auth)
       .then(() => {
         console.log("User signed out")
         navigate("/") // Redirect to home page
@@ -74,7 +74,7 @@ const Navbar = () => {
           <button onClick={handleLogout}>Logout</button>
         ) : (
           <button>
-            <Link to="/Login">Login</Link>
+            <Link to="/login">Login</Link>
             <img src={Arrow} className="Arrow" alt="Arrow" />
           </button>
         )}

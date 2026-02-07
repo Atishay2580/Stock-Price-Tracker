@@ -1,29 +1,20 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", Arial, sans-serif;
-  background: linear-gradient(135deg, #f3f4f6, #dfe3e8);
-  color: #333;
-}
-
 .news-container {
   max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #ffffffc9;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  margin: 40px auto;
+  padding: 30px 20px;
+  min-height: 60vh;
 }
 
 .news-heading {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   font-size: 2.5rem;
-  color: #007bff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(121, 39, 255, 0.8), rgba(255, 111, 145, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .news-grid {
@@ -34,15 +25,18 @@ body {
 
 .news-card {
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  background: #fff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
 .news-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 30px rgba(121, 39, 255, 0.3);
+  border-color: rgba(121, 39, 255, 0.3);
 }
 
 .news-image {
@@ -53,31 +47,37 @@ body {
 }
 
 .news-title {
-  font-size: 1.5rem;
-  margin: 15px 10px 5px;
-  font-weight: bold;
-  color: #333;
+  font-size: 1.3rem;
+  margin: 15px 15px 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.4;
 }
 
 .news-description {
-  margin: 0 10px 15px;
-  font-size: 1rem;
-  color: #666;
+  margin: 0 15px 15px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.6;
 }
 
 .news-link {
-  display: block;
-  margin: 0 10px 15px;
-  color: #007bff;
-  font-weight: bold;
+  display: inline-block;
+  margin: 0 15px 15px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(121, 39, 255, 0.8), rgba(255, 111, 145, 0.8));
+  color: white;
+  font-weight: 600;
   text-decoration: none;
-  transition: color 0.3s ease;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
 }
 
 .news-link:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  background: linear-gradient(135deg, rgba(255, 111, 145, 0.9), rgba(121, 39, 255, 0.9));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(121, 39, 255, 0.4);
 }
 
 .pagination {
@@ -92,29 +92,31 @@ body {
   padding: 12px 25px;
   font-size: 1rem;
   color: #fff;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, rgba(121, 39, 255, 0.8), rgba(255, 111, 145, 0.8));
   border: none;
-  border-radius: 30px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease, transform 0.3s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.pagination-button:hover {
-  background: linear-gradient(135deg, #0056b3, #003f7f);
-  transform: scale(1.1);
+.pagination-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(255, 111, 145, 0.9), rgba(121, 39, 255, 0.9));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(121, 39, 255, 0.4);
 }
 
 .pagination-button:disabled {
-  background: #ccc;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
   cursor: not-allowed;
   transform: none;
 }
 
 .page-info {
   font-size: 1.1rem;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @media (max-width: 768px) {

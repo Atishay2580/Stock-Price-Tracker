@@ -34,16 +34,31 @@ const callApi = async (endpoint, data) => {
         }
         case "metals": {
           const { metal } = data
-          const response = await axios.get(`/api/metals`, {
-            params: {
-              ids: metal,
-              vs_currencies: "usd",
-            },
-            headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_COINGECKO_API_KEY || ""}`,
-            },
-          })
-          return response.data
+          try {
+            // Try direct CoinGecko API call first (works in development with proxy)
+            const response = await axios.get(`https://api.coingecko.com/api/v3/simple/price`, {
+              params: {
+                ids: metal,
+                vs_currencies: "usd",
+              },
+              headers: {
+                Authorization: import.meta.env.VITE_COINGECKO_API_KEY
+                  ? `Bearer ${import.meta.env.VITE_COINGECKO_API_KEY}`
+                  : undefined,
+              },
+            })
+            return response.data
+          } catch (error) {
+            console.error("Direct CoinGecko API failed, trying proxy:", error)
+            // Fallback to proxy route
+            const proxyResponse = await axios.get(`/api/metals`, {
+              params: {
+                ids: metal,
+                vs_currencies: "usd",
+              },
+            })
+            return proxyResponse.data
+          }
         }
         case "chart": {
           const { symbol } = data

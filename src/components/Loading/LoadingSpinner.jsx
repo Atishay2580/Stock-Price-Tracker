@@ -1,9 +1,12 @@
-import "./LoadingSpinner.css" // Import the CSS for styling
+import "./LoadingSpinner.css"
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ message = "Fetching stocks..." }) => {
   return (
     <div className="loading-overlay">
-      <div className="spinner"></div>
+      <div className="loading-content">
+        <div className="spinner"></div>
+        <p className="loading-text">{message}</p>
+      </div>
     </div>
   )
 }
